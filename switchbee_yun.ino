@@ -57,6 +57,8 @@ void handleSwitch(int readPinIdx) {
 
   String apiUrl = "http://" + hueBridgeIP + apiPath + floorLampId + "/state";
   String payload = "";
+  long randomHue = 0;
+  int randomSat = 0;
 
   switch(readPinIdx) {
     //Off
@@ -71,6 +73,13 @@ void handleSwitch(int readPinIdx) {
     
     //Random color
     case 3:
+      randomHue = random(0, 65535);
+      randomSat = random(0, 254);
+      payload = "{\"on\": true, \"hue\": ";
+      payload += randomHue;
+      payload += ", \"sat\":";
+      payload += randomSat;
+      payload += "}";
       break;
     
     //Bedtime
